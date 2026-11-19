@@ -118,11 +118,15 @@ button.primary { background: var(--accent); border-color: var(--accent); color: 
 @media (prefers-reduced-motion: no-preference) {
   .pbar i { transition: width .3s; }
 }
+.home-link { display: inline-block; font-size: 14px; color: var(--accent); text-decoration: none; margin-bottom: 10px; }
+.home-link:hover { text-decoration: underline; }
+.home-link:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
+    <a class="home-link" href="index.html">← Sommaire du cours</a>
     <div class="eyebrow">Sébastien Moureau · Cours d’arabe pour la revue Arca · Module 1, leçon 3 · exercices interactifs</div>
     <h1>Les sept premières lettres</h1>
   </header>
@@ -394,24 +398,25 @@ function exErreur(stage) {
 }
 
 // ---------- 6. Tracé guidé ----------
+// Mêmes consignes que la page « Tracé des lettres » (m1l3-trace_des_lettres.html), qui fait référence pour le ductus.
 const HOWTO = {
   a: {
-    iso: "Tracez un trait vertical, de haut en bas.",
-    ini: "Tracez un trait vertical, de haut en bas.",
-    med: "L'alif se lie à la lettre précédente, jamais à la suivante. Arrivez par la ligne d'écriture, puis tracez le trait vertical.",
-    fin: "L'alif se lie à la lettre précédente, jamais à la suivante. Arrivez par la ligne d'écriture, puis tracez le trait vertical.",
+    iso: "Tracez l'alif d'un seul trait vertical, de haut en bas.",
+    ini: "Tracez l'alif d'un seul trait vertical, de haut en bas. Il ne se lie jamais à la lettre suivante : sa forme initiale est identique à sa forme isolée.",
+    med: "Arrivez de la lettre précédente par la ligne d'écriture, puis remontez en un trait vertical. L'alif ne se lie jamais à la lettre suivante.",
+    fin: "Arrivez de la lettre précédente par la ligne d'écriture, puis remontez en un trait vertical. Les formes médiane et finale sont identiques.",
   },
   b: {
-    iso: "La « petite barque » : partez au-dessus de la ligne d'écriture, descendez en courbe jusqu'à toucher la ligne, puis remontez légèrement vers la gauche. Ajoutez les points en dernier.",
-    ini: "Partez au-dessus de la ligne d'écriture, tracez le petit jambage vers le bas, puis partez vers la gauche sans remonter. Les points se placent sous le jambage ou au-dessus.",
-    med: "Arrivez de la lettre précédente sur la ligne d'écriture, formez le petit jambage, puis continuez vers la gauche. Les points se placent sous le jambage ou au-dessus.",
-    fin: "Arrivez de la lettre précédente, puis tracez la petite barque jusqu'à son extrémité gauche. Ajoutez les points en dernier.",
+    iso: "La « petite barque » : partez du haut de la pointe droite, descendez jusqu'à la ligne d'écriture, glissez vers la gauche en arrondi, puis remontez pour former la pointe gauche.",
+    ini: "Partez du haut de la dent, descendez jusqu'à la ligne d'écriture, puis partez vers la gauche, vers la lettre suivante.",
+    med: "Premier temps : arrivez de la lettre précédente par la ligne d'écriture, jusqu'au pied de la dent. Second temps : levez la plume, partez du haut de la dent, descendez en biais jusqu'à la ligne d'écriture, puis continuez vers la gauche.",
+    fin: "Premier temps : arrivez de la lettre précédente par la ligne d'écriture, jusqu'au pied de la dent. Second temps : levez la plume, partez du haut de la dent, descendez en biais jusqu'à la ligne, tracez la petite barque, puis remontez pour former la pointe gauche.",
   },
   j: {
-    iso: "Partez au-dessus de la ligne d'écriture et tracez d'abord un trait vers la droite (la « tête d'oiseau »), puis redescendez en courbe sous la ligne, la courbe ouverte vers la droite.",
-    ini: "Même départ que la forme isolée (la tête d'oiseau), puis repartez vers la gauche en descendant pour vous attacher à la lettre suivante.",
-    med: "En deux temps : arrivez de la lettre précédente, remontez légèrement pour former la tête d'oiseau, puis repartez vers la gauche.",
-    fin: "Arrivez de la lettre précédente, formez la tête d'oiseau, puis descendez en courbe sous la ligne d'écriture.",
+    iso: "Partez en haut à gauche et tracez la « tête d'oiseau » vers la droite jusqu'à sa pointe. Revenez en diagonale vers la gauche, puis descendez sous la ligne d'écriture en une courbe ouverte vers la droite.",
+    ini: "Partez en haut à gauche et tracez la tête d'oiseau vers la droite jusqu'à sa pointe, puis redescendez en diagonale vers la gauche jusqu'à la ligne d'écriture, vers la lettre suivante.",
+    med: "Premier temps : arrivez de la lettre précédente par la ligne d'écriture et soulevez légèrement le trait vers la tête de la lettre. Second temps : levez la plume, repartez en haut à gauche et tracez la tête d'oiseau vers la droite jusqu'à sa pointe, puis redescendez en diagonale jusqu'à la ligne et continuez vers la gauche.",
+    fin: "Premier temps : arrivez de la lettre précédente par la ligne d'écriture et soulevez légèrement le trait vers la tête de la lettre. Second temps : levez la plume, repartez en haut à gauche et tracez la tête d'oiseau vers la droite jusqu'à sa pointe, puis revenez vers la gauche et descendez en une courbe sous la ligne d'écriture.",
   },
 };
 function exTrace(stage) {
@@ -463,7 +468,7 @@ function exTrace(stage) {
     const g = ghost.getContext("2d");
     g.setTransform(1, 0, 0, 1, 0, 0); g.clearRect(0, 0, ghost.width, ghost.height); drawGlyph(g, "#000");
     const grp = cur.l.g;
-    const dots = cur.l.k === "alif" ? "" : ` Points : ${cur.l.dd}.`;
+    const dots = cur.l.k === "alif" ? "" : cur.l.k === "ha" ? " Le ḥāʾ n'a pas de point." : ` Pour finir, ajoutez ${cur.l.dd}${cur.l.dots[0] > 1 ? ", de droite à gauche" : ""}${cur.l.dots[0] === 3 ? " (les deux du bas, puis celui du haut)" : ""}.`;
     $("#howto").innerHTML = `<strong>${cur.l.n} (${cur.l.t}), ${posLabel(cur.l, cur.p)}.</strong> ${HOWTO[grp][cur.p]}${dots}`;
     $$("#pl button").forEach(b => b.setAttribute("aria-pressed", b.dataset.k === cur.l.k));
     $$("#pp button").forEach(b => b.setAttribute("aria-pressed", b.dataset.p === cur.p));
