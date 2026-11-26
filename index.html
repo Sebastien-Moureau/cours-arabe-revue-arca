@@ -40,6 +40,7 @@ h1 { font-family: var(--font-display); font-size: clamp(28px, 6vw, 38px); line-h
 h2 { font-family: var(--font-display); font-size: 22px; margin: 0 0 4px; font-weight: 700; }
 .lesson { margin: 0 0 12px; font-size: 14px; color: var(--muted); font-weight: 600; }
 section + section { margin-top: 32px; }
+.cards + .lesson { margin-top: 24px; }
 .cards { display: grid; gap: 12px; }
 .cards a { display: grid; grid-template-columns: minmax(0, 1fr) 80px; gap: 14px; align-items: center; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; color: var(--ink); text-decoration: none; }
 .cards a:hover { border-color: var(--accent); }
@@ -65,7 +66,7 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
 
   <section>
     <h2>Module 1</h2>
-    <p class="lesson">Leçon 3 · L’alphabet, première partie (<span class="ar" lang="ar">ا</span> à <span class="ar" lang="ar">خ</span>)</p>
+    <p class="lesson">Leçon 3 · L’alphabet, première partie (<span class="ar" dir="rtl" lang="ar">ا</span> à <span class="ar" dir="rtl" lang="ar">خ</span>)</p>
     <div class="cards">
       <a href="m1l3-trace_des_lettres.html">
         <span>
@@ -80,6 +81,23 @@ footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line);
           <span class="d">Six exercices : reconnaître les lettres, placer les points, assembler des mots, memory, tracé guidé…</span>
         </span>
         <span class="s" lang="ar" aria-hidden="true">بَاب</span>
+      </a>
+    </div>
+    <p class="lesson">Leçon 4 · L’alphabet, deuxième partie (<span class="ar" dir="rtl" lang="ar">د</span> à <span class="ar" dir="rtl" lang="ar">ش</span>)</p>
+    <div class="cards">
+      <a href="m1l4-trace_des_lettres.html">
+        <span>
+          <strong>Le tracé des lettres</strong>
+          <span class="d">Voir comment se dessinent dāl, dhāl, rāʾ, zāy, sīn et shīn, dans chacune de leurs formes.</span>
+        </span>
+        <span class="s" lang="ar" aria-hidden="true">س</span>
+      </a>
+      <a href="m1l4-exercices_interactifs.html">
+        <span>
+          <strong>Exercices interactifs</strong>
+          <span class="d">Six exercices : reconnaître les lettres, placer les points, assembler des mots, memory, tracé guidé…</span>
+        </span>
+        <span class="s" lang="ar" aria-hidden="true">دَرْس</span>
       </a>
     </div>
   </section>
